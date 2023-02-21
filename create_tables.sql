@@ -29,9 +29,9 @@ CREATE TABLE employees(
 --creating a table for deptartment employees
 --emp_no is the logical primary key, however emp_no 10001 is in both dept_emp and dept_manager, so its not a unique primary key
 CREATE TABLE dept_emp (
-	emp_no INT NOT NULL,
-	dept_no VARCHAR (10) NOT NULL,
-	FOREIGN KEY (dept_no)
+    emp_no INT NOT NULL,
+    dept_no VARCHAR (10) NOT NULL,
+    FOREIGN KEY (dept_no)
     REFERENCES departments(dept_no),
     FOREIGN KEY (emp_no)
     REFERENCES employees(emp_no),

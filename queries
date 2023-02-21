@@ -60,3 +60,8 @@ ON de.dept_no = d.dept_no
 WHERE d.dept_name = 'Development' OR d.dept_name = 'Sales'
 
 -- QUEARY 8
+
+SELECT COUNT (*), last_name
+FROM employees 
+GROUP BY last_name
+ORDER BY COUNT(*) DESC

@@ -27,36 +27,31 @@ CREATE TABLE employees(
 
 
 --creating a table for deptartment employees
---the only way i can get it to import the csv is to create the table without a primary key. 
---the import fails whenever i have a primary key anywhere. but im reading that every table should have a primary key
+--emp_no is the logical primary key, however emp_no 10001 is in both dept_emp and dept_manager, so its not a unique primary key
 CREATE TABLE dept_emp (
-	emp_no INT NOT NULL PRIMARY KEY,
+	emp_no INT NOT NULL,
 	dept_no VARCHAR (10) NOT NULL,
 	FOREIGN KEY (dept_no)
 	REFERENCES departments(dept_no),
     FOREIGN KEY (emp_no)
 	REFERENCES employees(emp_no)
+    PRIMARY KEY (emp_no, dept_no)
 );
 
-
+--ALTER TABLE dept_emp ADD PRIMARY KEY (emp_no, dept_no);
+--I had to add the primary key after the table creation
 
 
 
 --creating a table for department managers
---the only way i can get it to import the csv is to create the table without a primary key. 
---the import fails whenever i have a primary key anywhere. but im reading that every table should have a primary key
 CREATE TABLE dept_manager (
     dept_no VARCHAR (10) NOT NULL,
-    emp_no INT NOT NULL,
+    emp_no INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (dept_no)
     REFERENCES departments(dept_no),
     FOREIGN KEY (emp_no)
     REFERENCES employees(emp_no)
 );
-
-
-
-
 
 
 --creating a table for salaries
@@ -66,5 +61,35 @@ CREATE TABLE salaries (
     FOREIGN KEY (emp_no)
     REFERENCES employees(emp_no)
 );
+
+
+
+
+
+-- quearying the data
+select e.emp_no, e.last_name, e.first_name, e.sex, s.salary
+from employees e
+join salaries s
+on e.emp_no = s.emp_no
+
+--
+select first_name, last_name, hire_date
+from employees e
+where hire_date between '1986-01-01' and '1986-12-31'
+
+---
+
+select dm.emp_no, dm.dept_no, d.dept_name, e.last_name, e.first_name
+from dept_manager dm
+join departments d
+on d.dept_no = dm.dept_no
+
+join employees e
+on dm.emp_no = e.emp_no
+
+--
+
+
+
 
 

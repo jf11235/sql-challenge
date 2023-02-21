@@ -3,6 +3,7 @@
 Creating a database for our company using PgAdmin4, ERD diagram using app.quickdatabasediagrams.com, and importing our CSV files into the database. 
 
 Performing analysis on our database:
+
 Data Analysis
 
 1. List the employee number, last name, first name, sex, and salary of each employee.
